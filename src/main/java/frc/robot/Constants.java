@@ -10,7 +10,12 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstants;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstants.SteerFeedbackType;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstantsFactory;
 
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Transform3d;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.Filesystem;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -24,6 +29,37 @@ public final class Constants {
   
   public static final double TAU = Math.PI * 2;
 
+  public static final class AprilTags{
+        public static final String CAMERA1_NAME = "Yi's_Little_Buddy";
+        public static final String CAMERA2_NAME = "Ben's_Little_Buddy";
+
+        /* For PhotonEstimator
+         *             ^ 
+         *             |
+         *             Z        
+         *      --------------
+         *      |            |
+         *      |            |
+         *<-- X |     *Y     |
+         *      |            |
+         *      |            |
+         *      --------------
+         */
+        public static final Transform3d ROBOT_TO_CAMERA1 = new Transform3d(0, 0, Units.inchesToMeters(13), new Rotation3d(0, -18./360*TAU, 0));
+      //   public static final Transform3d ROBOT_TO_CAMERA1 = new Transform3d(0, 0, Units.inchesToMeters(0), new Rotation3d(0, 0, 0));
+        public static final Transform3d ROBOT_TO_CAMERA2 = new Transform3d(0,0,0, new Rotation3d());
+
+        public static final String LAYOUT_PATH = Filesystem.getDeployDirectory().getPath() + "/AprilTagPositions.json";
+
+        public static final double getXSD(double distance) {
+            return 0.0312*distance - 0.0494;
+        }
+
+        public static final double getYSD(double distance) {
+            return 0.0656*distance - 0.129;
+        }
+      }
+
   public static class Drive {
     public static final String CANBUS = "drivet";
 
@@ -32,6 +68,13 @@ public final class Constants {
 
     public static final double WIDTH = Units.inchesToMeters(21.75);
       public static final double LENGTH = Units.inchesToMeters(21.75);
+
+      public static final SwerveDriveKinematics KINEMATICS = new SwerveDriveKinematics(
+        new Translation2d(WIDTH/2, -LENGTH/2),
+        new Translation2d(WIDTH/2, LENGTH/2),
+        new Translation2d(-WIDTH/2, LENGTH/2),
+        new Translation2d(-WIDTH/2, -LENGTH/2)
+      );
 
       public static final Slot0Configs steerGains0 = new Slot0Configs()
           .withKP(20).withKI(0).withKD(0.0)
@@ -56,9 +99,9 @@ public final class Constants {
 
 
       private static final Slot0Configs driveGains = new Slot0Configs()
-          .withKP(0.22).withKI(0).withKD(0)
+          .withKP(0.22).withKI(0).withKD(0.0)
       // .withKP(0).withKI(0).withKD(0)
-          .withKS(0).withKV(0.1165).withKA(0);
+          .withKS(0.21).withKV(0.1077).withKA(0);
 
       private static final ClosedLoopOutputType steerClosedLoopOutput = ClosedLoopOutputType.Voltage;
       private static final ClosedLoopOutputType driveClosedLoopOutput = ClosedLoopOutputType.Voltage;
@@ -70,7 +113,8 @@ public final class Constants {
       // private static final double kCoupleRatio = 3.5714285714285716;
       private static final double kCoupleRatio = 0.0;
 
-      public static final double kDriveGearRatio = 8.142857142857142;
+      //18:50, 25:19, 15:45
+      public static final double kDriveGearRatio = 50./18*19/25*45/15; //0.63 0.57
       public static final double kSteerGearRatio = 21.428571428571427;
       // private static final double kWheelRadiusInches = 1.840; //Direction of resistence
       private static final double kWheelRadiusInches = 1.967; //Direction of less-resistence

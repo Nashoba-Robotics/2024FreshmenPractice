@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import org.littletonrobotics.junction.Logger;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import edu.wpi.first.math.trajectory.TrapezoidProfile.State;
@@ -15,6 +16,8 @@ public class TurnTestCommand extends Command{
     private DriveSubsystem drive;
 
     TrapezoidProfile control;
+    PIDController pidController;
+
     Timer t;
 
     State startState;
@@ -24,6 +27,8 @@ public class TurnTestCommand extends Command{
         addRequirements(drive);
 
         control = new TrapezoidProfile(new Constraints(2, 4));
+        pidController = new PIDController(0.09, 0, 0.008);
+        pidController.setTolerance(0.05);
         t = new Timer();
     }
 
@@ -35,11 +40,12 @@ public class TurnTestCommand extends Command{
 
     @Override
     public void execute() {
-        State state = control.calculate(t.get(), startState, new State(startState.position + Constants.TAU/4, 0));
+        State state = control.calculate(t.get(), startState, new State(startState.position + Constants.TAU/2, 0));
+        state.velocity += pidController.calculate(drive.getYaw().getRadians(), state.position);
         Logger.recordOutput("GoalPosition", state.position);
         Logger.recordOutput("GoalSpeed", state.velocity);
 
-        drive.set(0, 0, state.velocity);
+        if(!pidController.atSetpoint())drive.set(0, 0, state.velocity);
     }
 
 
