@@ -1,8 +1,10 @@
 package frc.robot.subsystems.drive;
 
+import java.util.List;
+
 import org.littletonrobotics.junction.Logger;
 
-import edu.wpi.first.math.Matrix;
+import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -11,11 +13,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.math.numbers.N1;
-import edu.wpi.first.math.numbers.N3;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.lib.math.NRUnits;
@@ -23,6 +21,7 @@ import frc.robot.lib.math.SwerveMath;
 
 public class DriveSubsystem extends SubsystemBase{
 
+    private SwerveDrivePoseEstimator odometry;
 
     private Module[] modules;
 
@@ -34,7 +33,7 @@ public class DriveSubsystem extends SubsystemBase{
     public DriveSubsystem() {
         gyroIO = new GyroIOPigeon2();
 
-        fieldCentric = true;
+        fieldCentric = false;
 
         modules = new Module[] {
             new Module(0, Constants.Drive.CANBUS),
@@ -43,6 +42,14 @@ public class DriveSubsystem extends SubsystemBase{
             new Module(3, Constants.Drive.CANBUS)
         };
 
+        odometry = new SwerveDrivePoseEstimator(
+            Constants.Drive.KINEMATICS,
+            getGyroAngle(),
+            getSwerveModulePositions(),
+            new Pose2d(0, 0, Rotation2d.fromRadians(0)),
+            VecBuilder.fill(0, 0, 0),
+            VecBuilder.fill(0, 0, 0)
+            );
     }
 
     /*
@@ -176,20 +183,23 @@ public class DriveSubsystem extends SubsystemBase{
         return Rotation2d.fromRadians(gyroInputs.roll);
     }
 
+    public void resetOdometry(Pose2d pose) {
+        odometry.resetPosition(getGyroAngle(), getSwerveModulePositions(), pose);
+    }
 
+    public void updateOdometryWithVision(double time, Pose2d pose) {
+        odometry.addVisionMeasurement(pose, time);
+    }
 
     @Override
     public void periodic(){
+        odometry.updateWithTime(Timer.getFPGATimestamp(), getGyroAngle(), getSwerveModulePositions());
+
         gyroIO.updateInputs(gyroInputs);
         Logger.processInputs("Drive/Gyro", gyroInputs);
 
         for(Module module : modules) {
             module.periodic();
         }
-
-        Logger.recordOutput("FPGATimestamp", Timer.getFPGATimestamp());
-
-
-        Logger.recordOutput("GetGyroAngle", getGyroAngle().getRadians());
     }
 }
