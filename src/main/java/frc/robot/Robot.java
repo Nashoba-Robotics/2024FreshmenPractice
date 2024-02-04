@@ -48,6 +48,10 @@ public class Robot extends LoggedRobot {
     Logger.start(); // Start logging! No more data receivers, replay sources, or metadata values may be added.
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+
+    //record the version to the log
+    Logger.recordMetadata("version","v1.0");
+
     m_robotContainer = new RobotContainer();
 
     new AprilTagManager();
