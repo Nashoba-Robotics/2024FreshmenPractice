@@ -33,7 +33,7 @@ public class DriveSubsystem extends SubsystemBase{
     public DriveSubsystem() {
         gyroIO = new GyroIOPigeon2();
 
-        fieldCentric = false;
+        fieldCentric = true;
 
         modules = new Module[] {
             new Module(0, Constants.Drive.CANBUS),
@@ -46,9 +46,9 @@ public class DriveSubsystem extends SubsystemBase{
             Constants.Drive.KINEMATICS,
             getGyroAngle(),
             getSwerveModulePositions(),
-            new Pose2d(0, 0, Rotation2d.fromRadians(0)),
-            VecBuilder.fill(0, 0, 0),
-            VecBuilder.fill(0, 0, 0)
+            new Pose2d(0, 0, Rotation2d.fromRadians(0))
+            // VecBuilder.fill(0, 0, 0),
+            // VecBuilder.fill(0, 0, 0)
             );
     }
 
@@ -187,8 +187,12 @@ public class DriveSubsystem extends SubsystemBase{
         odometry.resetPosition(getGyroAngle(), getSwerveModulePositions(), pose);
     }
 
-    public void updateOdometryWithVision(double time, Pose2d pose) {
+    public void updateOdometryWithVision(Pose2d pose, double time) {
         odometry.addVisionMeasurement(pose, time);
+    }
+
+    public Pose2d getPose() {
+        return odometry.getEstimatedPosition();
     }
 
     @Override
@@ -201,5 +205,7 @@ public class DriveSubsystem extends SubsystemBase{
         for(Module module : modules) {
             module.periodic();
         }
+
+        Logger.recordOutput("Pose", getPose());
     }
 }
