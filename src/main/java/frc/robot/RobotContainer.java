@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.TurnTestCommand;
 import frc.robot.commands.TurnTestVisionCommand;
+import frc.robot.commands.FreshmenTurnToAprilTagCommand;
+import frc.robot.commands.FreshmenTurnToTargetCommand;
+import frc.robot.commands.fridayCode;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.joystick.JoystickSubsystem;
 
@@ -19,8 +22,10 @@ public class RobotContainer {
 
   private void configureBindings() {
     SmartDashboard.putData(new DriveCommand(drive, joysticks));
-    SmartDashboard.putData(new TurnTestCommand(drive));
-    SmartDashboard.putData(new TurnTestVisionCommand(drive));
+    SmartDashboard.putData(new FreshmenTurnToTargetCommand(0));
+    SmartDashboard.putData(new FreshmenTurnToAprilTagCommand());
+    SmartDashboard.putData(new fridayCode());
+
   }
 
 }
