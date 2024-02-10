@@ -122,6 +122,10 @@ public class DriveSubsystem extends SubsystemBase{
         return states;
     }
 
+    public double getZVel(){
+        return gyroInputs.zVelocity;
+    }
+
     public void setStates(SwerveModuleState[] states) {
         for(int i = 0; i < modules.length; i++) {
             Logger.recordOutput("Velocity/Mod"+i+"Velocity", states[i].speedMetersPerSecond);
