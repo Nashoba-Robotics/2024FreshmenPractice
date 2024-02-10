@@ -61,10 +61,10 @@ public class ModuleIOTalonFX implements ModuleIO {
             module.apply(
                 new SwerveModuleState(0, module.getTargetState().angle),
                 DriveRequestType.Velocity,
-                SteerRequestType.MotionMagic
+                SteerRequestType.MotionMagicExpo
             );
         } else
-        module.apply(state, DriveRequestType.Velocity, SteerRequestType.MotionMagic);
+        module.apply(state, DriveRequestType.Velocity, SteerRequestType.MotionMagicExpo);
     }
 
     public void setBoltage(double voltage){

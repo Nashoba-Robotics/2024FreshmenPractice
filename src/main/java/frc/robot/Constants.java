@@ -147,7 +147,7 @@ public final class Constants {
               .withDriveInertia(kDriveInertia)
               .withSteerFrictionVoltage(kSteerFrictionVoltage)
               .withDriveFrictionVoltage(kDriveFrictionVoltage)
-              .withFeedbackSource(SteerFeedbackType.FusedCANcoder)
+              .withFeedbackSource(SteerFeedbackType.SyncCANcoder)
               .withCouplingGearRatio(kCoupleRatio)
               .withSteerMotorInverted(kSteerMotorReversed);
 
@@ -165,7 +165,7 @@ public final class Constants {
               .withDriveInertia(kDriveInertia)
               .withSteerFrictionVoltage(kSteerFrictionVoltage)
               .withDriveFrictionVoltage(kDriveFrictionVoltage)
-              .withFeedbackSource(SteerFeedbackType.FusedCANcoder)
+              .withFeedbackSource(SteerFeedbackType.SyncCANcoder)
               .withCouplingGearRatio(kCoupleRatio)
               .withSteerMotorInverted(kSteerMotorReversed);
         
@@ -183,7 +183,7 @@ public final class Constants {
               .withDriveInertia(kDriveInertia)
               .withSteerFrictionVoltage(kSteerFrictionVoltage)
               .withDriveFrictionVoltage(kDriveFrictionVoltage)
-              .withFeedbackSource(SteerFeedbackType.FusedCANcoder)
+              .withFeedbackSource(SteerFeedbackType.SyncCANcoder)
               .withCouplingGearRatio(kCoupleRatio)
               .withSteerMotorInverted(kSteerMotorReversed);
 
@@ -201,7 +201,7 @@ public final class Constants {
               .withDriveInertia(kDriveInertia)
               .withSteerFrictionVoltage(kSteerFrictionVoltage)
               .withDriveFrictionVoltage(kDriveFrictionVoltage)
-              .withFeedbackSource(SteerFeedbackType.FusedCANcoder)
+              .withFeedbackSource(SteerFeedbackType.SyncCANcoder)
               .withCouplingGearRatio(kCoupleRatio)
               .withSteerMotorInverted(kSteerMotorReversed);
 
