@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.apriltags.AprilTagManager;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -33,11 +34,6 @@ public class Robot extends LoggedRobot {
    */
   @Override
   public void robotInit() {
-    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-    // autonomous chooser on the dashboard.
-
-    Logger.recordMetadata("ProjectName", "2024NashobaRobotics"); // Set a metadata value
-
     if(isReal()) {
         Logger.addDataReceiver(new WPILOGWriter()); // Log to a USB stick ("/U/logs")
         Logger.addDataReceiver(new NT4Publisher()); // Publish data to NetworkTables
@@ -50,8 +46,15 @@ public class Robot extends LoggedRobot {
     }
 
     Logger.start(); // Start logging! No more data receivers, replay sources, or metadata values may be added.
+    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
+    // autonomous chooser on the dashboard.
 
+    Logger.recordMetadata("ProjectName", "2024NashobaRobotics"); // Set a metadata value
+
+    
     m_robotContainer = new RobotContainer();
+
+    new AprilTagManager();
   }
 
   /**
@@ -68,6 +71,12 @@ public class Robot extends LoggedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+
+    if(AprilTagManager.hasTarget() 
+      && AprilTagManager.getAmbiguity() <= 0.2 
+      && AprilTagManager.getRobotPos() != null
+      )
+        RobotContainer.drive.updateOdometryWithVision(AprilTagManager.getRobotPos().toPose2d(), AprilTagManager.getTimestamp());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
