@@ -38,7 +38,7 @@ public void execute(){
   
     else {
         currentGyro = drive.getGyroAngle().getRadians();
-        PIDoutput = controller.calculate(currentGyro - lastKnownGyro);
+        PIDoutput = -controller.calculate(currentGyro - targetAngle);
         speed.omegaRadiansPerSecond = PIDoutput; 
     }
         
