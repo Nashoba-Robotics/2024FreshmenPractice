@@ -49,7 +49,7 @@ public final class Constants {
       //   public static final Transform3d ROBOT_TO_CAMERA1 = new Transform3d(0, 0, Units.inchesToMeters(0), new Rotation3d(0, 0, 0));
         public static final Transform3d ROBOT_TO_CAMERA2 = new Transform3d(0,0,0, new Rotation3d());
 
-        public static final String LAYOUT_PATH = Filesystem.getDeployDirectory().getPath() + "/AprilTagPositions.json";
+        public static final String LAYOUT_PATH = Filesystem.getDeployDirectory().getPath() + "/NashobaTagPositions.json";
 
         public static final double getXSD(double distance) {
             return 0.0312*distance - 0.0494;
@@ -147,7 +147,7 @@ public final class Constants {
               .withDriveInertia(kDriveInertia)
               .withSteerFrictionVoltage(kSteerFrictionVoltage)
               .withDriveFrictionVoltage(kDriveFrictionVoltage)
-              .withFeedbackSource(SteerFeedbackType.FusedCANcoder)
+              .withFeedbackSource(SteerFeedbackType.SyncCANcoder)
               .withCouplingGearRatio(kCoupleRatio)
               .withSteerMotorInverted(kSteerMotorReversed);
 
@@ -165,7 +165,7 @@ public final class Constants {
               .withDriveInertia(kDriveInertia)
               .withSteerFrictionVoltage(kSteerFrictionVoltage)
               .withDriveFrictionVoltage(kDriveFrictionVoltage)
-              .withFeedbackSource(SteerFeedbackType.FusedCANcoder)
+              .withFeedbackSource(SteerFeedbackType.SyncCANcoder)
               .withCouplingGearRatio(kCoupleRatio)
               .withSteerMotorInverted(kSteerMotorReversed);
         
@@ -183,7 +183,7 @@ public final class Constants {
               .withDriveInertia(kDriveInertia)
               .withSteerFrictionVoltage(kSteerFrictionVoltage)
               .withDriveFrictionVoltage(kDriveFrictionVoltage)
-              .withFeedbackSource(SteerFeedbackType.FusedCANcoder)
+              .withFeedbackSource(SteerFeedbackType.SyncCANcoder)
               .withCouplingGearRatio(kCoupleRatio)
               .withSteerMotorInverted(kSteerMotorReversed);
 
@@ -201,7 +201,7 @@ public final class Constants {
               .withDriveInertia(kDriveInertia)
               .withSteerFrictionVoltage(kSteerFrictionVoltage)
               .withDriveFrictionVoltage(kDriveFrictionVoltage)
-              .withFeedbackSource(SteerFeedbackType.FusedCANcoder)
+              .withFeedbackSource(SteerFeedbackType.SyncCANcoder)
               .withCouplingGearRatio(kCoupleRatio)
               .withSteerMotorInverted(kSteerMotorReversed);
 
