@@ -1,5 +1,7 @@
 package frc.robot.lib.util;
 
+import java.util.function.DoubleSupplier;
+
 import frc.robot.Constants;
 import frc.robot.lib.math.NRUnits;
 
@@ -11,6 +13,10 @@ public class JoystickValues {
     public JoystickValues(double x, double y) {
         this.x = x;
         this.y = y;
+    }
+    public JoystickValues(DoubleSupplier x, DoubleSupplier y){
+        this.x = x.getAsDouble();
+        this.y = -y.getAsDouble();
     }
 
     public JoystickValues shape(double[] deadzones, double[] sensitivities) {
