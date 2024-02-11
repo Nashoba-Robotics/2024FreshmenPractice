@@ -20,9 +20,9 @@ public class RobotContainer {
 
   private void configureBindings() {
     SmartDashboard.putData(new DriveCommand(drive, joysticks));
-    SmartDashboard.putData(new FreshmenTurnToTargetCommand(0));
+    // SmartDashboard.putData(new FreshmenTurnToTargetCommand(0));
     SmartDashboard.putData(new FreshmenTurnToAprilTagCommand());
-    SmartDashboard.putData(new fridayCode());
+    // SmartDashboard.putData(new fridayCode());
 
   }
 
