@@ -15,6 +15,7 @@ import frc.robot.commands.TurnTestVisionCommand;
 import frc.robot.commands.TurnToAngleCommand;
 import frc.robot.commands.FreshmenTurnToAprilTagCommand;
 import frc.robot.commands.FreshmenTurnToTargetCommand;
+import frc.robot.commands.SashaTriesToLightACANdle;
 import frc.robot.commands.TargetedDriveCommand;
 import frc.robot.commands.fridayCode;
 import frc.robot.subsystems.apriltags.AprilTagManager;
@@ -47,6 +48,7 @@ public class RobotContainer {
     // SmartDashboard.putData(new fridayCode());
     SmartDashboard.putData(new TurnToAngleCommand(drive));
     SmartDashboard.putData(new TargetedDriveCommand(drive, controller::getX, controller::getY, controller::getTwist));
+    SmartDashboard.putData(new SashaTriesToLightACANdle());
 
     SmartDashboard.putData(new InstantCommand(() -> {
       drive.resetOdometry(AprilTagManager.getRobotPos().toPose2d());
