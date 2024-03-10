@@ -10,13 +10,13 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 
-public class fridayCode extends Command{
+public class ridayCode extends Command{
     public DriveSubsystem drive = RobotContainer.drive;
     public PIDController controller; 
     public double lastKnownGyro;
     public double currentGyro;
     public double targetAngle;
-    public fridayCode(){
+    public ridayCode(){
         controller = new PIDController(3.7, 0, 0.003);
         addRequirements(drive);
     }

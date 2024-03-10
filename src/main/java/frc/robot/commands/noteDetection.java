@@ -20,7 +20,7 @@ import frc.robot.subsystems.drive.DriveSubsystem;
      * In execute, use a PID controller to set the robot's angle equal to the read yaw. --
      */
 
-public class noteDetection extends Command{
+public class NoteDetection extends Command{
     public PhotonCamera camera = new PhotonCamera("HD_USB_Camera");
     public PhotonPipelineResult result = camera.getLatestResult();
     public DriveSubsystem drive = RobotContainer.drive;
@@ -30,7 +30,7 @@ public class noteDetection extends Command{
     public PIDController controller;
 
     
-    public noteDetection(){
+    public NoteDetection(){
         controller= new PIDController(0.0965, 0, 0);
         controller.setTolerance(0.02);
         controller.enableContinuousInput(-180, 180);
@@ -58,13 +58,13 @@ public class noteDetection extends Command{
             Logger.recordOutput("Yaw", yaw);  
             Logger.recordOutput("PIDSpeed", PIDoutput);
             drive.set(speed);
-            drive.move(Forward);
         }
         else{
             speed.omegaRadiansPerSecond= 0;
             drive.set(speed);
             
         }
+
         
         
     }
