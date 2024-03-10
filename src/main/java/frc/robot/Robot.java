@@ -54,7 +54,7 @@ public class Robot extends LoggedRobot {
     
     m_robotContainer = new RobotContainer();
 
-    new AprilTagManager();
+    // new AprilTagManager();
   }
 
   /**
@@ -72,11 +72,11 @@ public class Robot extends LoggedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
 
-    if(AprilTagManager.hasTarget() 
-      && AprilTagManager.getAmbiguity() <= 0.2 
-      && AprilTagManager.getRobotPos() != null
-      )
-        RobotContainer.drive.updateOdometryWithVision(AprilTagManager.getRobotPos().toPose2d(), AprilTagManager.getTimestamp());
+    // if(AprilTagManager.hasTarget() 
+    //   && AprilTagManager.getAmbiguity() <= 0.2 
+    //   && AprilTagManager.getRobotPos() != null
+    //   )
+    //     RobotContainer.drive.updateOdometryWithVision(AprilTagManager.getRobotPos().toPose2d(), AprilTagManager.getTimestamp());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
