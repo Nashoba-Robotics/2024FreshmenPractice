@@ -45,8 +45,8 @@ public final class Constants {
          *      |            |
          *      --------------
          */
-        public static final Transform3d ROBOT_TO_CAMERA1 = new Transform3d(0, 0, Units.inchesToMeters(13), new Rotation3d(0, -18./360*TAU, 0));
-      //   public static final Transform3d ROBOT_TO_CAMERA1 = new Transform3d(0, 0, Units.inchesToMeters(0), new Rotation3d(0, 0, 0));
+        // public static final Transform3d ROBOT_TO_CAMERA1 = new Transform3d(0, 0, Units.inchesToMeters(13), new Rotation3d(0, -18./360*TAU, 0));
+        public static final Transform3d ROBOT_TO_CAMERA1 = new Transform3d(Units.inchesToMeters(0), Units.inchesToMeters(0), Units.inchesToMeters(0), new Rotation3d(0, -12./360*TAU, 0));
         public static final Transform3d ROBOT_TO_CAMERA2 = new Transform3d(0,0,0, new Rotation3d());
 
         public static final String LAYOUT_PATH = Filesystem.getDeployDirectory().getPath() + "/NashobaTagPositions.json";
@@ -147,7 +147,7 @@ public final class Constants {
               .withDriveInertia(kDriveInertia)
               .withSteerFrictionVoltage(kSteerFrictionVoltage)
               .withDriveFrictionVoltage(kDriveFrictionVoltage)
-              .withFeedbackSource(SteerFeedbackType.SyncCANcoder)
+              .withFeedbackSource(SteerFeedbackType.FusedCANcoder)
               .withCouplingGearRatio(kCoupleRatio)
               .withSteerMotorInverted(kSteerMotorReversed);
 
@@ -165,7 +165,7 @@ public final class Constants {
               .withDriveInertia(kDriveInertia)
               .withSteerFrictionVoltage(kSteerFrictionVoltage)
               .withDriveFrictionVoltage(kDriveFrictionVoltage)
-              .withFeedbackSource(SteerFeedbackType.SyncCANcoder)
+              .withFeedbackSource(SteerFeedbackType.FusedCANcoder)
               .withCouplingGearRatio(kCoupleRatio)
               .withSteerMotorInverted(kSteerMotorReversed);
         
@@ -183,7 +183,7 @@ public final class Constants {
               .withDriveInertia(kDriveInertia)
               .withSteerFrictionVoltage(kSteerFrictionVoltage)
               .withDriveFrictionVoltage(kDriveFrictionVoltage)
-              .withFeedbackSource(SteerFeedbackType.SyncCANcoder)
+              .withFeedbackSource(SteerFeedbackType.FusedCANcoder)
               .withCouplingGearRatio(kCoupleRatio)
               .withSteerMotorInverted(kSteerMotorReversed);
 
@@ -201,7 +201,7 @@ public final class Constants {
               .withDriveInertia(kDriveInertia)
               .withSteerFrictionVoltage(kSteerFrictionVoltage)
               .withDriveFrictionVoltage(kDriveFrictionVoltage)
-              .withFeedbackSource(SteerFeedbackType.SyncCANcoder)
+              .withFeedbackSource(SteerFeedbackType.FusedCANcoder)
               .withCouplingGearRatio(kCoupleRatio)
               .withSteerMotorInverted(kSteerMotorReversed);
 

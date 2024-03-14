@@ -33,6 +33,7 @@ public class AprilTagIOPhotonVision implements AprilTagIO{
                 Constants.AprilTags.ROBOT_TO_CAMERA1);
             exists = true;
 
+            poseEstimator.setFieldTags(layout);
             poseEstimator.setMultiTagFallbackStrategy(PoseStrategy.LOWEST_AMBIGUITY);   //TODO: YAAAY
 
         } catch(IOException e){

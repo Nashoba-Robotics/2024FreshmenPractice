@@ -49,9 +49,9 @@ public class Robot extends LoggedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
 
-    //record the version to the log
-    Logger.recordMetadata("version","v1.0");
+    Logger.recordMetadata("ProjectName", "2024NashobaRobotics"); // Set a metadata value
 
+    
     m_robotContainer = new RobotContainer();
 
     new AprilTagManager();
