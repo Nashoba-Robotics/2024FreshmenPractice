@@ -45,6 +45,7 @@ public class LidarSubsystem extends SubsystemBase {
     public Optional<Alliance> ally;
 
     public LidarSubsystem(){
+        timer.start();
         drive = RobotContainer.drive;
         ally = DriverStation.getAlliance();
 
@@ -68,12 +69,6 @@ public class LidarSubsystem extends SubsystemBase {
         return filter.calculate((counter.getPeriod()*1000000 / 10) / 100);
         }
     }
-    
-    
-    public void initialize() {
-        timer.start();
-    }
-
 
     public double getOponentVelocity() {
 
@@ -81,9 +76,9 @@ public class LidarSubsystem extends SubsystemBase {
         currentDist = getDist();
 
         lastTime = currentTime;
-        currentTime = timer.get();
+        currentTime = System.currentTimeMillis();
 
-        lidarVelocity = Math.abs((currentDist - lastDist) / (currentTime - lastTime));
+        lidarVelocity = Math.abs((currentDist - lastDist) / ((currentTime - lastTime) * 1000));
 
         SmartDashboard.putNumber("Object Dist", getDist());
         SmartDashboard.putNumber("Object lidarVelocity", lidarVelocity);
